@@ -41,4 +41,23 @@ cache:
  - node_modules
  ```
  
+ # Elixir
  
+ Elixir is a little niche language, so I've addeed a video for added support. So let's say you have a .travis.yml build file for Elixir that reads like this:
+ 
+ 
+```yaml
+language: elixir
+
+elixir:
+  - '1.0.5'
+  otp_release: '17.4'
+
+  jobs:
+    include:
+      - elixir: '1.2'
+      otp_release: '18.0'
+      ```
+      
+This is a pretty basic setup to get your Elixir app in the build pipeline, herer's a video for further details: 
+
