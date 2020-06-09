@@ -1,4 +1,4 @@
-# Travis Cookbook 
+# Travis Cookbook (practical ways at approaching Travis CI) 
 
 Firstly it's important to remember your Travis ```.yml``` file can be linted/validated here: http://lint.travis-ci.org/.
 
@@ -202,3 +202,5 @@ git push --force --quiet -u "https://${GH_TOKEN}@${GH_REF}" gh-pages > /dev/null
 
 popd >/dev/null
 ```
+
+# NodeJS 
