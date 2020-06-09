@@ -57,6 +57,29 @@ elixir:
       - elixir: '1.2'
       otp_release: '18.0'
 ```
+
+Some things noteworthy of Elixir when it comes to Travis. Travis CI deprecated ```sudo: false```.
+
+```bash
+hex.publish
+```
+Added
+```bash
+HEX_API_KEY
+``` 
+Also environment variables and, yes flag CI updates (v0.18). Accounting for these changes, and using the ```git clean -f``` command to address the ```git stash``` issue my deploy section ended up being a lot smaller:
+
+```yaml
+deploy:
+  provider: script
+  script: >-
+    mix deps.get &&
+    mix hex.publish --yes &&
+    git clean -f
+  on:
+    tags: true
+  ```
+This approach requires that you generate an API key from ```hex``` and then set it as an Travis CI env var ```(HEX_API_KEY)```. The one way I was able to get around this fairly easily (Montana fix here) is to use ```git stash pop```. Essentially what I did was ```git stash pop``` takes a stashed change, removes it from the “stash stack”, and applies it to your current working tree
       
       
 # Python 
