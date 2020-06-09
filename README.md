@@ -241,3 +241,4 @@ In this case now, run all your classic git commands like:
  git push -u origin master
  ```
  
+ Docker with PHP 
