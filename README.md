@@ -239,6 +239,16 @@ In this case now, run all your classic git commands like:
  git remote add origin remote repository URL
  git remote -v 
  git push -u origin master
- ```
- 
- Docker with PHP 
+
+# Using Services in Travis (Docker) 
+
+What you'll want to do is grab a Dockaer image based on what language you'er going to use in your .travis.yml file. In this exmple I've picked PHP. So first you're gonna want to open up temrinal and run:
+
+```bash
+docker run --name travis-montana -dit travisci/ci-php:packer-1494867192 /sbin/init```
+
+In the above example but you can see I named it ```montana``` but name the container whatever you want. Just remember what you named it whe you are working the terminal. Once the image is installed, start the Docker container: 
+
+```bash
+docker exec -it travis-montana bash -l
+```
