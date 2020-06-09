@@ -204,3 +204,29 @@ popd >/dev/null
 ```
 
 # NodeJS 
+
+Sample NodeJS .travis.yml config:
+
+```yaml
+language: node_js
+node_js: 
+  - "stable"
+cache:
+  directories:
+    - "node_modules"
+ ```
+ 
+Here's the test spec I created for this cookbook:
+
+```node
+const expect = require('chai').expect
+const server = require('../index');
+
+# Montana want's it to return a string (just for own reference) - Montana
+
+describe('test', () => {
+  it('should return a string', () => {
+    expect('ci with travis').to.equal('ci with travis');
+  });
+ ```
+});
