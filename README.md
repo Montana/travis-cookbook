@@ -1,4 +1,4 @@
-## Travis Cookbook 
+# Travis Cookbook 
 
 Firstly it's important to remember your Travis ```.yml``` file can be linted/validated here: http://lint.travis-ci.org/.
 
@@ -103,3 +103,37 @@ after_script:
  cache: pip
  ```
 ```Cache``` allows for a Python package versions to be stored between runtime, to speed up sequential builds. Cache can apply to more than just Python packages.
+
+```yaml
+python:
+    - "3.6"
+    - "3.7"
+    - "3.8"
+    - "nightly"
+  ```
+    
+Python, given the above language specification, is a key for a sequence of Python versions to perform builds against. Generally most CI tools use the latest bug release version for each minor version. The build logs will tell you the specific versions, you can also view these logs manually via running in debug mode. 
+
+```yaml
+matrix:
+    allow_failures:
+        - python: "nightly"
+   ```
+```Matrix``` allows for modifications in the above build sequence. In this case, the ```allow_failures``` key specifies a reference to the Python sequence above, and has the value of "nightly", meaning that that version is _possibly_ allowed to fail. Depending on what more build instructions you have.
+
+At some point, you'll have a requirements.txt file, in here this is where you'll have your dependencies: 
+
+```yaml
+pip install -r requirements.txt
+```
+
+To continue with the Python build, you're going to need to run some updates in the .yml file, via: 
+
+```yaml
+sudo apt-get update
+sudo apt-get install python3-pip
+sudo apt-get install python3-pytest
+```
+
+Now add an existing project to GitHub, head over to Travis CI and login, and start the build for Python! 
+
