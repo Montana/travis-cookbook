@@ -256,5 +256,6 @@ docker exec -it travis-montana bash -l
 ```
 Now switch to the Travis user 
 
-```su - travs
+```bash
+su - travs
 ``` 
