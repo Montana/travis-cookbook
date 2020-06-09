@@ -238,6 +238,6 @@ In this case now, run all your classic git commands like:
  git commit -m "Travis build" 
  git remote add origin remote repository URL
  git remote -v 
- git push -u origin mastere 
+ git push -u origin master
  ```
  
