@@ -259,3 +259,12 @@ Now switch to the Travis user
 ```bash
 su - travs
 ``` 
+Now for Docker remember you have all the CLI tools installed: 
+
+```bash
+gem install travis
+travis
+bundle install
+bundler add travis
+bundler binstubs travis
+```
