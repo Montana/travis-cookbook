@@ -79,7 +79,7 @@ deploy:
   on:
     tags: true
   ```
-This approach requires that you generate an API key from ```hex``` and then set it as an Travis CI env var ```(HEX_API_KEY)```. The one way I was able to get around this fairly easily (Montana fix here) is to use ```git stash pop```. Essentially what I did was ```git stash pop``` takes a stashed change, removes it from the “stash stack”, and applies it to your current working tree
+This approach requires that you generate an API key from ```hex``` and then set it as an Travis CI env var ```(HEX_API_KEY)```. The one way I was able to get around this fairly easily (Montana fix here) is to use ```git stash pop```. Essentially what I did was ```git stash pop``, pop  takes a stashed change, removes it from the “stash stack”, and applies it to your current working tree
       
       
 # Python 
