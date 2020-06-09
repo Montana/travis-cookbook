@@ -45,7 +45,7 @@ cache:
  
  Elixir is a little niche language, so I've addeed a video for added support. So let's say you have a .travis.yml build file for Elixir that reads like this:
  
-<pre>
+```yaml
 language: elixir
 
 elixir:
@@ -56,7 +56,7 @@ elixir:
     include:
       - elixir: '1.2'
       otp_release: '18.0'
-      </pre>
+```
       
       
 # Python 
