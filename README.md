@@ -254,3 +254,6 @@ In the above example but you can see I named it ```montana``` but name the conta
 ```bash
 docker exec -it travis-montana bash -l
 ```
+Now switch to the Travis user 
+
+```su - travs``` 
