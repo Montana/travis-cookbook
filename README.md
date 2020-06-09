@@ -58,5 +58,48 @@ elixir:
       otp_release: '18.0'
       </pre>
       
-This is a pretty basic setup to get your Elixir app in the build pipeline, herer's a video for further details: 
+      
+# Python 
 
+Python is one of the most popular languages that are used here at Travis. A classic ```.travis.yml``` file for Python would look like this: 
+
+```yaml
+dist: xenial
+
+language: python
+
+cache: pip
+
+python:
+    - "3.6"
+    - "3.7"
+    - "3.8"
+    - "nightly"
+
+matrix:
+    allow_failures:
+        - python: "nightly"
+
+install:
+    - pip install pipenv --upgrade-strategy=only-if-needed
+    - pipenv install --dev
+
+script:
+    - bash scripts/test.sh
+
+after_script:
+    - bash <(curl -s https://codecov.io/bash)
+ ```
+ 
+ # For Python, let's explain each section: 
+ 
+ ```yaml
+ dist: xenial
+ ```
+ 
+ ```dist``` in the .yml file is where the Ubuntu Release codename is specified.  Please see: http://releases.ubuntu.com/ for a full list. This specifies the base operating system used for the rest of workflow.
+ 
+ ```yaml
+ cache: pip
+ ```
+```Cache``` allows for a Python package versions to be stored between runtime, to speed up sequential builds. Cache can apply to more than just Python packages.
