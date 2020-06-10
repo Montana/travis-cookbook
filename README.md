@@ -291,3 +291,19 @@ bundle install
 bundler add travis
 bundler binstubs travis
 ```
+# Setting up your Docker tests locally 
+
+Genereate a new SSH key for GitHub (using your own email of course)
+
+```bash
+ssh-keygen -t rsa -b 4096 -C "your-github-email@example.com"
+```
+
+
+Now copy the contents of the key you’ve just created to your GitHub SSH keys. Name the key something that is easy to identify like _Travis Key_. Assuming you saved your key to the default path you can view it using:
+
+```bash
+less ~/.ssh/id_rsa.pub```
+
+
+
