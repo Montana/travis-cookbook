@@ -303,7 +303,40 @@ ssh-keygen -t rsa -b 4096 -C "your-github-email@example.com"
 Now copy the contents of the key you’ve just created to your GitHub SSH keys. Name the key something that is easy to identify like _Travis Key_. Assuming you saved your key to the default path you can view it using:
 
 ```bash
-less ~/.ssh/id_rsa.pub```
+less ~/.ssh/id_rsa.pub
+```
+Now clone the repo you want to run tests on, change to your builds direrctory
+
+```cd~/ builds
+```
+
+Now clone the repo and ```cd``` into the dirctory made by the clone:
+
+Now, to the interesting part, let's compile your Travis build script, we use this vis
+
+```bash
+travis buld
+```
+Now we want to write this to a file called travis.ci -- so the fnal command would look something like: 
+
+```bash
+travis compile > travis.ci
+```
+You'll have to make some changes to this file, whatever editor is easiest for you is fine, in this case I'll be using vim:
+```bash
+vim.travis.ci
+```
+
+You'll want to search for a line similar to: 
+
+```git
+branch\=\'\NEW_BRANCH'\
+ ```
+Change this to your branch name, and run your script!
+
+
+
+
 
 
 
