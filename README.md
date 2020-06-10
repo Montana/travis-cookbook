@@ -1,4 +1,4 @@
-# Travis Cookbook (practical ways at approaching Travis CI) 
+# Travis Cookbook (Practical ways at approaching Travis CI) 
 
 Firstly it's important to remember your Travis ```.yml``` file can be linted/validated here: http://lint.travis-ci.org/.
 
