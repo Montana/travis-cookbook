@@ -299,7 +299,6 @@ Genereate a new SSH key for GitHub (using your own email of course)
 ssh-keygen -t rsa -b 4096 -C "your-github-email@example.com"
 ```
 
-
 Now copy the contents of the key you’ve just created to your GitHub SSH keys. Name the key something that is easy to identify like _Travis Key_. Assuming you saved your key to the default path you can view it using:
 
 ```bash
@@ -309,8 +308,6 @@ Now clone the repo you want to run tests on, change to your builds direrctory
 
 ```cd~/ builds
 ```
-
-Now clone the repo and ```cd``` into the dirctory made by the clone:
 
 Now, to the interesting part, let's compile your Travis build script, we use this vis
 
