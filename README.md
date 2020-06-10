@@ -306,7 +306,14 @@ less ~/.ssh/id_rsa.pub
 ```
 Now clone the repo you want to run tests on, change to your builds direrctory
 
-```cd~/ builds
+```bash
+cd ~/builds
+```
+Then clone repo, then change over to the directory the cloe made:
+
+```bash
+git clone git@github.com:AUTHOR/PROJECT.git
+cd PROJECT
 ```
 
 Now, to the interesting part, let's compile your Travis build script, we use this vis
