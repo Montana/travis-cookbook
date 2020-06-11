@@ -291,7 +291,7 @@ bundle install
 bundler add travis
 bundler binstubs travis
 ```
-# Setting up your Docker tests locally 
+# Setting up your Docker tests locally:
 
 Genereate a new SSH key for GitHub (using your own email of course)
 
