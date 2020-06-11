@@ -282,7 +282,7 @@ Now switch to the Travis user
 ```bash
 su - travs
 ``` 
-Now for Docker remember you have all the CLI tools installe locallyd: 
+Now for Docker remember you have all the CLI tools installe locally: 
 
 ```bash
 gem install travis
