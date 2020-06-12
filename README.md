@@ -338,8 +338,7 @@ branch\=\'\NEW_BRANCH'\
  ```
 Change this to your branch name, and run your script!
 
-
-
+# Using Docker with Travis CI
 
 
 
