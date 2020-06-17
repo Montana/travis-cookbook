@@ -467,9 +467,7 @@ Now remember to encrypt your ```env vars``` for our AWS keys, there were three o
 - AWS_ACCESS_KEY_ID
 - AWS_SECRET_ACCESS_KEY
 
-Since you have Travis installed, read this snippet of [information](https://docs.travis-ci.com/user/environment-variables/#encrypting-environment-variables).
-
-So we can run: 
+Since you have Travis installed, read this snippet of [information](https://docs.travis-ci.com/user/environment-variables/#encrypting-environment-variables). So we can run: 
 
 ```bash
 travis encrypt AWS_ACCOUNT_ID=super_secret --add
