@@ -342,7 +342,7 @@ Change this to your branch name, and run your script!
 
 For this example we will assume you are using ```python3```
 
-```bash
+```Dockerfile
 from python:3.6
 CMD ["python", "-c", "print(12345)"]
 ```
@@ -393,7 +393,7 @@ Now let's say this Travis file wants to push to Amazon ECR. Keep in mind that EC
 
 As you see it also expects some environmental variables which I’ll provide in ```.travis.yml.``` Below is an updated script:
 
-```yaml
+```bash
 #!/bin/bash -e
 
 # the registry should have been created already
@@ -437,8 +437,7 @@ In this scenario I pushed 2 tags, ```latest``` and ```versioned```. AWS also has
 
 As you see it also expects some environmental variables which I’ll provide in ```.travis.yml.```. You'll see an updated script assuming above one was named ```docker_push.sh```:
 
-```
-yaml
+```yaml
 sudo: required
 language: python
 services:
