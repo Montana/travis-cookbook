@@ -340,6 +340,139 @@ Change this to your branch name, and run your script!
 
 # Using Docker with Travis CI
 
+For this example we will assume you are using ```python3```
+
+```bash
+from python:3.6
+CMD ["python", "-c", "print(12345)"]
+```
+
+Next up let's build an image and run it! 
+
+```
+docker build -t foobar .
 
 
+Sending build context to Docker daemon  2.048kB
+Step 1/2 : from python:3.6
+ ---> 3e4c2972dc8d
+Step 2/2 : CMD ["python", "-c", "print(12345)"]
+ ---> Running in 5e3273c46264
+Removing intermediate container 5e3273c46264
+ ---> c1d000f3a768
+Successfully built c1d000f3a768
+Successfully tagged foobar:latest
+```
+
+The image is built using ```foobar``` as a tag in which myself, I’ll use next when running it:
+
+```bash
+docker run --rm -ti foobar
+12345
+```
+
+Some explanations of the arguments below:
+
+- ```--rm``` - Automatically removes the container when it exits
+- ```--tty``` -t - Allocate a pseudo-TTY also known as a ```pts```
+- ```--interactive , -i``` - Keeps ```STDIN``` open even if not attached to the container
+
+Now let's setup the Travis ```.yml``` file! As you'll notice we will be using ```services``` (as Docker is our service in this method). This file as usual should be listed as ```.travis.yml```.
+
+```yaml
+sudo: required
+language: python
+services:
+- docker
+
+script:
+- docker build -t foobar .
+```
+
+Now let's say this Travis file wants to push to Amazon ECR. Keep in mind that ECR has some limits on maximum amount of tags and images. 
+
+As you see it also expects some environmental variables which I’ll provide in ```.travis.yml.``` Below is an updated script:
+
+```yaml
+#!/bin/bash -e
+
+# the registry should have been created already
+# you could just paste a given url from AWS but I'm
+# parameterising it to make it more obvious how its constructed
+REGISTRY_URL=${AWS_ACCOUNT_ID}.dkr.ecr.${EB_REGION}.amazonaws.com
+# this is most likely namespaced repo name like myorg/veryimportantimage
+SOURCE_IMAGE="${DOCKER_REPO}"
+# using it as there will be 2 versions published
+TARGET_IMAGE="${REGISTRY_URL}/${DOCKER_REPO}"
+# lets make sure we always have access to latest image
+TARGET_IMAGE_LATEST="${TARGET_IMAGE}:latest"
+TIMESTAMP=$(date '+%Y%m%d%H%M%S')
+# using datetime as part of a version for versioned image
+VERSION="${TIMESTAMP}-${TRAVIS_COMMIT}"
+# using specific version as well
+# it is useful if you want to reference this particular version
+# in additional commands like deployment of new Elasticbeanstalk version
+TARGET_IMAGE_VERSIONED="${TARGET_IMAGE}:${VERSION}"
+
+# making sure correct region is set
+aws configure set default.region ${EB_REGION}
+
+# Push image to ECR
+###################
+
+# I'm speculating it obtains temporary access token
+# it expects aws access key and secret set
+# in environmental vars
+$(aws ecr get-login --no-include-email)
+
+# update latest version
+docker tag ${SOURCE_IMAGE} ${TARGET_IMAGE_LATEST}
+docker push ${TARGET_IMAGE_LATEST}
+
+# push new version
+docker tag ${SOURCE_IMAGE} ${TARGET_IMAGE_VERSIONED}
+docker push ${TARGET_IMAGE_VERSIONED}
+```
+In this scenario I pushed 2 tags, ```latest``` and ```versioned```. AWS also has limits on [this.](https://docs.aws.amazon.com/AmazonECR/latest/userguide/service-quotas.html).
+
+As you see it also expects some environmental variables which I’ll provide in ```.travis.yml.```. You'll see an updated script assuming above one was named ```docker_push.sh```:
+
+```
+yaml
+sudo: required
+language: python
+services:
+- docker
+env:
+  global:
+  - DOCKER_REPO=myorg/veryimportantimage
+  - EB_REGION="eu-west-1"
+  - secure: travisEncryptedAWS_ACCOUNT_ID
+  - secure: travisEncryptedAWS_ACCESS_KEY_ID
+  - secure: travisEncryptedAWS_SECRET_ACCESS_KEY
+before_install:
+- pip install awscli
+- export PATH=$PATH:$HOME/.local/bin
+script:
+- docker build -t $DOCKER_REPO .
+deploy:
+  provider: script
+  script: bash docker_push.sh
+  on:
+    branch: master
+ ```
+    
+Now remember to encrypt your ```env vars``` for our AWS keys, there were three of them:
+
+- AWS_ACCOUNT_ID
+- AWS_ACCESS_KEY_ID
+- AWS_SECRET_ACCESS_KEY
+
+Since you have Travis installed, read this snippet of [information](https://docs.travis-ci.com/user/environment-variables/#encrypting-environment-variables).
+
+So we can run: 
+
+```bash
+travis encrypt AWS_ACCOUNT_ID=super_secret --add
+```
 
