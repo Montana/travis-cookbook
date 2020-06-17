@@ -433,9 +433,9 @@ docker push ${TARGET_IMAGE_LATEST}
 docker tag ${SOURCE_IMAGE} ${TARGET_IMAGE_VERSIONED}
 docker push ${TARGET_IMAGE_VERSIONED}
 ```
-In this scenario I pushed 2 tags, ```latest``` and ```versioned```. AWS also has limits on [this.](https://docs.aws.amazon.com/AmazonECR/latest/userguide/service-quotas.html).
+In this scenario I pushed 2 tags, ```latest``` and ```versioned```. AWS also has limits on [this](https://docs.aws.amazon.com/AmazonECR/latest/userguide/service-quotas.html).
 
-As you see it also expects some environmental variables which I’ll provide in ```.travis.yml.```. You'll see an updated script assuming above one was named ```docker_push.sh```:
+As you see it also expects some environmental variables which I’ll provide in ```.travis.yml.``` You'll see an updated script assuming above one was named ```docker_push.sh```:
 
 ```yaml
 sudo: required
