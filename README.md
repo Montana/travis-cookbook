@@ -266,7 +266,7 @@ In this case now, run all your classic git commands like:
 
 # Using Services in Travis (Docker) 
 
-What you'll want to do is grab a Docker image based on what language you'er going to use in your .travis.yml file. In this exmple I've picked PHP. So first you're gonna want to open up temrinal and run:
+What you'll want to do is grab a Docker image based on what language you're going to use in your .travis.yml file. In this exmple I've picked PHP. So first you're gonna want to open up temrinal and run:
 
 ```bash
 docker run --name travis-montana -dit travisci/ci-php:packer-1494867192 /sbin/init
