@@ -473,3 +473,44 @@ Since you have Travis installed, read this snippet of [information](https://docs
 travis encrypt AWS_ACCOUNT_ID=super_secret --add
 ```
 
+# Rails
+
+You'll obviously want to signup for Travis, be sure to sync your account, open your ```Gemfile``` and add: 
+```ruby
+gem 'travis' 
+```
+Run any migrations you may need to make, then: 
+
+```ruby
+bundle install
+```
+In this use case, we are creating the ```.travis.yml``` via:
+
+```bash
+travis init
+```
+You don't in theory need to specify a Ruby version, Travis will look at your ```ruby-```, but you can definitely specify a Ruby version if you chose to:
+
+```yaml
+language: ruby
+dist: xenial
+rvm: 2.5.8
+``` 
+That tells Travis what language (Ruby), what ```dist``` you'll be using (also can be changed) and ```rvm``` the version of Ruby you'll be using. You can now add ```script``` which is commands you're telling Travis to run when you triggered a build, so it could look like the following: 
+
+```yaml
+script:
+ — bundle install — jobs=3 — retry=3
+ — bundle exec rake db:create
+ — bundle exec rake db:migrate
+ — bundle exec rspec
+ ```
+ 
+ You can then check your ```.travis.yml```'s validity via the linting online application http://lint.travis-ci.org/, or do it manually: 
+ 
+ ```bash
+ travis lint
+ ``` 
+ 
+ Then commit changes and see your Rails app build! 
+
