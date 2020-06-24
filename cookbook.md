@@ -518,3 +518,4 @@ script:
  
  Then commit changes and see your Rails app build! 
 
+# Travis testing via Docker
