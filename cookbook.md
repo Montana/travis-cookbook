@@ -6,6 +6,10 @@ Firstly it's important to remember your ```.travis.yml``` file can be linted/val
 
 For supported languages, take a look here: https://docs.travis-ci.com/user/languages/ (note: R is community based). 
 
+# Videos 
+
+[ HERE ] [ HERE ] 
+
 # Classic Java 
 
 Below is a yml file that leverages Gradle, this is a sample of how it would be used in Travis: 
